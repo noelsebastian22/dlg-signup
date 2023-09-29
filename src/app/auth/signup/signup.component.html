@@ -1,0 +1,20 @@
+<div class="container grid grid--center">
+  <div class="card">
+    <div class="card__title">
+      <h1>Create Account</h1>
+      <span>Already have an account? <a href="login">Sign In</a></span>
+    </div>
+    <div class="form">
+      <form action="/register" method="post">
+        <app-text-input [placeholder]="'First Name'" label="First Name"></app-text-input>
+        <app-text-input [placeholder]="'Last Name'" label="Last Name"></app-text-input>
+        <app-text-input [type]="'email'" [placeholder]="'Email'" label="Email"></app-text-input>
+        <!-- <button>Sign Up</button> -->
+        <app-button [type]="'submit'">Sign Up</app-button>
+      </form>
+    </div>
+    <div class="card__terms">
+      <input type="checkbox" name="" id="terms" /> <span>I have read and agree to the <a href="">Terms of Service</a></span>
+    </div>
+  </div>
+</div>
