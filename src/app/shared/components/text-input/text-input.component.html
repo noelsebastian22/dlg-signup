@@ -1,1 +1,16 @@
-<input class="text-input" [type]="type" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="onInputChange($event)" />
+<input
+  class="Input"
+  [type]="type"
+  [placeholder]="placeholder"
+  [ngModel]="value"
+  (ngModelChange)="onInputChange($event)"
+  [ngClass]="{ 'Input__is-invalid': isInvalid() }"
+/>
+<div *ngIf="isInvalid()" class="Input__invalid-feedback">
+  <ng-container [ngSwitch]="true">
+    <div *ngSwitchCase="control?.errors?.['required']">This field is required</div>
+    <div *ngSwitchCase="control?.errors?.['email']">Please enter a valid email address</div>
+    <!-- Add more cases for other error types if needed -->
+    <div *ngSwitchDefault>Unexpected error</div>
+  </ng-container>
+</div>

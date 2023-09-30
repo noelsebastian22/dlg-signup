@@ -1,7 +1,7 @@
 @import './src/base';
 
-.custom-button {
-  background-color: $clr-accent;
+.Button {
+  background-color: $clr-accent-200;
   color: $clr-neutral;
   font-size: 16px;
   outline: none;
@@ -9,4 +9,12 @@
   border: none;
   padding: 10px 15px;
   width: 100%;
+  &__disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:hover,
+  &:focus-visible {
+    background-color: $clr-accent-100;
+  }
 }
