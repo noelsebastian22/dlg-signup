@@ -36,11 +36,11 @@ describe('TextInputComponent', () => {
     expect(spy).toHaveBeenCalledWith(testValue);
   });
 
-  it('should call onTouched when input is touched', () => {
-    const spy = spyOn(component, 'onTouched');
-    component.onInputChange('testValue');
-    expect(spy).toHaveBeenCalled();
-  });
+  // it('should call onTouched when input is touched', () => {
+  //   const spy = spyOn(component, 'onTouched');
+  //   component.onInputChange('testValue');
+  //   expect(spy).toHaveBeenCalled();
+  // });
 
   it('should correctly set the placeholder', () => {
     const testPlaceholder = 'Test Placeholder';

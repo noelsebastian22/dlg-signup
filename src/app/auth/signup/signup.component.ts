@@ -8,4 +8,12 @@ import { Component } from '@angular/core';
 export class SignupComponent {
   value = '';
   constructor() {}
+
+  signIn(): void {
+    alert('Sign In to be implemented');
+  }
+
+  preventNavigation($event: Event): void {
+    $event.preventDefault();
+  }
 }
