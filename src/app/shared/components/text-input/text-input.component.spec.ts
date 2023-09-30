@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgControl } from '@angular/forms';
 import { TextInputComponent } from './text-input.component';
 
 describe('TextInputComponent', () => {
@@ -36,12 +36,6 @@ describe('TextInputComponent', () => {
     expect(spy).toHaveBeenCalledWith(testValue);
   });
 
-  // it('should call onTouched when input is touched', () => {
-  //   const spy = spyOn(component, 'onTouched');
-  //   component.onInputChange('testValue');
-  //   expect(spy).toHaveBeenCalled();
-  // });
-
   it('should correctly set the placeholder', () => {
     const testPlaceholder = 'Test Placeholder';
     component.placeholder = testPlaceholder;
@@ -56,5 +50,33 @@ describe('TextInputComponent', () => {
     fixture.detectChanges();
     const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('input');
     expect(inputElement.type).toEqual(testType);
+  });
+
+  it('should return true when control is invalid and dirty', () => {
+    const ngControlMock = {
+      invalid: true,
+      dirty: true,
+      touched: true,
+    } as NgControl;
+
+    component.control = ngControlMock;
+
+    const result = component.isInvalid();
+
+    expect(result).toBe(true);
+  });
+
+  it('should return false when control is valid', () => {
+    const ngControlMock = {
+      invalid: false,
+      dirty: true,
+      touched: true,
+    } as NgControl;
+
+    component.control = ngControlMock;
+
+    const result = component.isInvalid();
+
+    expect(result).toBe(false);
   });
 });
