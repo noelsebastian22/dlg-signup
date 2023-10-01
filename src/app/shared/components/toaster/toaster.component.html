@@ -1,0 +1,8 @@
+<div class="Toast" *ngFor="let toast of toasterService.activeToasts$ | async" [ngClass]="getToastClasses(toast.type)">
+  <header class="Toast__header">
+    <h1 class="Toast__title">{{ toast.title }}</h1>
+    <button type="button" class="Toast__close" (click)="toasterService.removeToast(toast.id)"></button>
+  </header>
+
+  <div class="Toast__body" [innerHTML]="toast.body"></div>
+</div>

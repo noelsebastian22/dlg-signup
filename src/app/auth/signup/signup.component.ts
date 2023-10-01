@@ -2,6 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { LoginService } from 'src/app/core/services/login.service';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
+import { ToastType } from 'src/app/shared/components/toaster/types/Toast';
 import { LoginUser } from 'src/app/shared/types/login-user';
 
 @Component({
@@ -24,7 +26,7 @@ export class SignupComponent implements OnDestroy {
    */
   private destroy$ = new Subject<void>();
 
-  constructor(private loginService: LoginService, private fb: FormBuilder) {}
+  constructor(private loginService: LoginService, private fb: FormBuilder, private toasterService: ToasterService) {}
 
   signIn(): void {
     alert('Sign In to be implemented');
@@ -45,6 +47,7 @@ export class SignupComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         // Steps after successful signup
+        this.toasterService.pop('Success', 'Signup Successful', ToastType.SUCCESS);
       });
   }
 
