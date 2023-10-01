@@ -1,0 +1,91 @@
+@import './src/base';
+
+:host {
+  z-index: 1;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.Toast {
+  display: block;
+  background: $clr-neutral;
+  border: 1px solid $clr-primary;
+  border-bottom: 0;
+  font-size: 12px;
+  color: $clr-primary;
+  width: 300px;
+  border-radius: 15px 15px 15px 15px;
+  &--success {
+    background: $clr-success;
+    border-color: $clr-success;
+    color: $clr-neutral;
+  }
+  &--error {
+    background: $clr-error;
+    border-color: $clr-error;
+    color: $clr-neutral;
+  }
+  &--warning {
+    background: $clr-warning;
+    border-color: $clr-warning;
+    color: $clr-neutral;
+  }
+  &--info {
+    background: $clr-info;
+    border-color: $clr-info;
+    color: $clr-neutral;
+  }
+  &__header {
+    display: flex;
+    padding: 15px;
+
+    // background: $clr-secondary;
+    // border-bottom: 1px solid $clr-primary;
+    justify-content: space-between;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 15px;
+    margin: 0;
+    color: inherit;
+  }
+
+  &__close {
+    position: relative;
+    width: 1.1em;
+    height: 1.1em;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    user-select: none;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &:after {
+      content: '×';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: -0.1em 0 0;
+      font-weight: bold;
+      color: $clr-secondary;
+      font-size: 1.5em;
+    }
+  }
+
+  &__body {
+    min-height: 60px;
+    padding: 12px;
+  }
+}

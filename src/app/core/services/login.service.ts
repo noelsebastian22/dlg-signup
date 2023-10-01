@@ -14,7 +14,7 @@ export class LoginService {
    * Signup a new user
    * @param user
    */
-  public signup(user: LoginUser): Observable<Object> {
+  public signup(user: LoginUser): Observable<LoginUser> {
     return this.httpClient.post<LoginUser>(this.appConfig.apiRoots.signup, { ...user });
   }
 }

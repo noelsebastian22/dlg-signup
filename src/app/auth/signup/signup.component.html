@@ -13,9 +13,6 @@
         <app-button [disabled]="signUpForm.invalid" [type]="'submit'" (clicked)="signUp()">Sign Up</app-button>
       </form>
     </div>
-    <div class="card__terms">
-      <input type="checkbox" name="" id="terms" />
-      <span>I have read and agree to the <a href="" (click)="preventNavigation($event)">Terms of Service</a></span>
-    </div>
   </div>
 </div>
+<app-loading-swirly *ngIf="loading"></app-loading-swirly>

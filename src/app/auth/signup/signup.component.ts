@@ -1,7 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { LoginService } from 'src/app/core/services/login.service';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
+import { ToastType } from 'src/app/shared/components/toaster/types/Toast';
 import { LoginUser } from 'src/app/shared/types/login-user';
 
 @Component({
@@ -22,9 +24,11 @@ export class SignupComponent implements OnDestroy {
   /**
    * Destroy the subscription on component destroy
    */
-  private destroy$ = new Subject<void>();
+  public destroy$ = new Subject<void>();
 
-  constructor(private loginService: LoginService, private fb: FormBuilder) {}
+  public loading = false;
+
+  constructor(private loginService: LoginService, private fb: FormBuilder, private toasterService: ToasterService) {}
 
   signIn(): void {
     alert('Sign In to be implemented');
@@ -39,17 +43,31 @@ export class SignupComponent implements OnDestroy {
   }
 
   signUp(): void {
-    const loginUser: LoginUser = { ...this.signUpForm.value } as LoginUser;
-    this.loginService
-      .signup(loginUser)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
-        // Steps after successful signup
-      });
+    if (this.signUpForm.valid) {
+      this.loading = true;
+      const loginUser: LoginUser = {
+        firstName: this.signUpForm.value.firstName as string,
+        lastName: this.signUpForm.value.lastName as string,
+        email: this.signUpForm.value.email as string,
+      };
+      this.loginService
+        .signup(loginUser)
+        .pipe(
+          takeUntil(this.destroy$),
+          finalize(() => (this.loading = false))
+        )
+        .subscribe(() => {
+          this.toasterService.pop('Success', 'Signup Successful', ToastType.SUCCESS);
+          this.loading = false;
+          this.signUpForm.reset();
+        });
+    }
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    if (this.destroy$) {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
   }
 }
